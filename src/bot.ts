@@ -1,5 +1,5 @@
 const cron = require( 'node-cron');
-import { KBotify, AppCommand, AppFunc, BaseSession } from '../sdk';
+import { KBotify, AppCommand, AppFunc, BaseSession } from './sdk';
 import { Logger } from '@nestjs/common';
 
 class EchoKmd extends AppCommand {
@@ -55,7 +55,7 @@ export default function runBot() {
   // })
 
   bot.message.on('image', (msg) => {
-    Logger.warn(JSON.stringify(msg))
+    Logger.error(JSON.stringify(msg))
     
     if (msg.channelId === '9646458729065308' || msg.channelId === '9765906942670925') {
       bot.API.message.addReaction(msg.msgId, '👍')

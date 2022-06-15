@@ -5,8 +5,9 @@ import runBot from './bot'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+runBot()
+
   await app.listen(3000);
 }
 
-runBot()
 bootstrap();

@@ -1,4 +1,4 @@
-import LRUCache from 'lru-cache';
+import * as LRUCache from 'lru-cache';
 import { BaseObject } from '../base/bot.object';
 import { KBotify } from '../kbotify';
 import { GuildCache } from './cache.guild';

@@ -1,6 +1,4 @@
-import { Logger } from '@nestjs/common';
-
-Logger.error(bunyan)
+import * as bunyan from 'bunyan';
 
 export const kBotifyLogger = bunyan.createLogger({
     name: 'kBotify',

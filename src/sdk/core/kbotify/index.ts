@@ -52,7 +52,7 @@ export class KBotify extends KaiheilaBot {
      */
     constructor(config: BotConfig & { debug?: boolean }, omit = true) {
         super(config);
-            this.logger.addStream({
+            this.logger.warn({
                 level: 'debug',
                 stream: process.stdout,
             });
