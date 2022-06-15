@@ -1,5 +1,6 @@
-const cron = require('node-cron');
-import { KBotify, AppCommand, AppFunc, BaseSession } from 'kbotify';
+const cron = require( 'node-cron');
+import { KBotify, AppCommand, AppFunc, BaseSession } from '../sdk';
+import { Logger } from '@nestjs/common';
 
 class EchoKmd extends AppCommand {
   code = 'kmd'; // 只是用作标记
@@ -23,11 +24,43 @@ const bot = new KBotify({
 
 bot.addCommands(new EchoKmd());
 
-// 0 12
-cron.schedule('0 12 * * *', () => {
-  bot.API.message.create(1, '7399123414064767', '(met)2875889652(met)滴滴滴 又到一天读书时 有时间别忘记读书哦')
+cron.schedule('0 20 * * *', () => {
+  bot.API.message.create(1, '7399123414064767', '(met)all(met) 滴滴滴 又到一天读书时 有时间别忘记读书哦')
 });
 
+cron.schedule('* * * * *', () => {
+  Logger.log('info')
+});
+
+
 export default function runBot() {
+  bot.event.on('system', (...args) => {
+    Logger.warn(JSON.stringify(args))
+  })
+
+  bot.message.on('text', (msg) => {
+    Logger.warn(JSON.stringify(msg))
+    
+    if (msg.channelId === '9646458729065308' || msg.channelId === '9765906942670925') {
+      bot.API.message.addReaction(msg.msgId, '👍')
+    }
+  })
+
+  // bot.message.on('file', (msg) => {
+  //   Logger.warn(JSON.stringify(msg))
+    
+  //   if (msg.channelId === '9646458729065308' || msg.channelId === '9765906942670925') {
+  //     bot.API.message.addReaction(msg.msgId, '👍')
+  //   }
+  // })
+
+  bot.message.on('image', (msg) => {
+    Logger.warn(JSON.stringify(msg))
+    
+    if (msg.channelId === '9646458729065308' || msg.channelId === '9765906942670925') {
+      bot.API.message.addReaction(msg.msgId, '👍')
+    }
+  })
+
   bot.connect(); // 启动 Bot
 }
